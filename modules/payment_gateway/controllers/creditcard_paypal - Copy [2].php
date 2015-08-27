@@ -147,7 +147,7 @@ if($_POST){
                /// $this->referral_amount_payment_deatils = $this->creditcard_paypal_pay->products_referral_amount_payment_deatils($referral_amount);
 				
                 common::message(1, $this->Lang["THANK_FOR_PURCH"]);
-                url::redirect(PATH."payment_product/cart_order_complete.html");
+                url::redirect(PATH."payment_product/cart_payment_paypal.html");
 	       }
 	       else{
 

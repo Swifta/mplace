@@ -29,9 +29,9 @@
 			
            /* $ret = array();
             $arg = array();
-            $arg['userName'] = ZENITH_TEST_USER;
-            $arg['Pwd'] = ZENITH_TEST_PASS;
-            $soap = new SoapClient(ZENITH_TEST_ENDPOINT);
+            $arg['userName'] = ZENITH_SOAP_USER;
+            $arg['Pwd'] = ZENITH_SOAP_PWD;
+            $soap = new SoapClient(ZENITH_SOAP_URL);
             $fun_resp_branch = $soap->getBranchList($arg);
 			
 			
@@ -73,9 +73,9 @@
 			
 			
             /*$arg = array();
-            $arg['userName'] = ZENITH_TEST_USER;
-            $arg['Pwd'] = ZENITH_TEST_PASS;
-            $soap = new SoapClient(ZENITH_TEST_ENDPOINT);
+            $arg['userName'] = ZENITH_SOAP_USER;
+            $arg['Pwd'] = ZENITH_SOAP_PWD;
+            $soap = new SoapClient(ZENITH_SOAP_URL);
             $fun_resp_branch = $soap->getBranchList($arg);
 			
 			echo '<?xml version="1.0" encoding="utf-8"?>
@@ -92,9 +92,9 @@
 			
 			  
    		/*$arg = array();
-		$arg['userName'] = ZENITH_TEST_USER;
-        $arg['Pwd'] = ZENITH_TEST_PASS;
-		$soap = new SoapClient(ZENITH_TEST_ENDPOINT);
+		$arg['userName'] = ZENITH_SOAP_USER;
+        $arg['Pwd'] = ZENITH_SOAP_PWD;
+		$soap = new SoapClient(ZENITH_SOAP_URL);
 		$fun_resp_branch = $soap->getBranchList($arg);
 		$branches = $fun_resp_branch->getBranchListResult->Branches;
 		
@@ -106,9 +106,9 @@
 		
 		$ret = array();
             $arg = array();
-            $arg['userName'] = ZENITH_TEST_USER;
-            $arg['Pwd'] = ZENITH_TEST_PASS;
-            $soap = new SoapClient(ZENITH_TEST_ENDPOINT);
+            $arg['userName'] = ZENITH_SOAP_USER;
+            $arg['Pwd'] = ZENITH_SOAP_PWD;
+            $soap = new SoapClient(ZENITH_SOAP_URL);
             $fun_resp_class = $soap->getAccountClass($arg);
             foreach($fun_resp_class->getAccountClassResult->ClassCode as $value){
                 $ret[$value->ClassCodes] = $value->ClassName;

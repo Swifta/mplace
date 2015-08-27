@@ -833,7 +833,7 @@ $content_text = array(
 
 "ADD_ANY" => "Add city to subscribe",
 
-"SIGN_IN_WITH"=>"Sign in with your facebook account: Connect your facebook account to sign in to $THIS_SITENAME.",
+"SIGN_IN_WITH"=>"Connect with your social network $THIS_SITENAME.",
 
 "SIGN_UP_WITH"=>"Sign up with facebook",
 
@@ -884,6 +884,9 @@ $content_text = array(
 "CONNECTIONS"=>"Connections",
 
 "FB_CONN" => "Facebook connect",
+"GOOGLE_CONN" => "Google connect",
+"TWITTER_CONN" => "TwitterSIGN_IN_WITH connect",
+    
 
 "GENDER" => "Gender",
 
@@ -1530,8 +1533,8 @@ $content_text = array(
 
 "ZENITH_SEL_CLASS" => "Select class",
 
-"ORD_COMPL_COD" => "Purchase Complete. Please await shipping updates from merchant.",
 
+	
     
 
 			);

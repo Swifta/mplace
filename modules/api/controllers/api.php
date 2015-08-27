@@ -1656,17 +1656,17 @@ class Api_Controller extends Layout_Controller
 
 	public function registration()
 	{
-		if($_POST){ 
-			$post = new Validation($_POST);
+	//	if($_POST){ 
+			$post = new Validation($_GET);
 			$lang = $this->input->post('lang');
-			$post = Validation::factory($_POST)
+			$post = Validation::factory($_GET)
 						->add_rules('firstname','required')
 						->add_rules('email','required')
 						//->add_rules('password','required')
 						->add_rules('city_id','required');
 			if($post->validate()){
                               
-				if(!valid::email($this->input->post("email"))){
+				if(!valid::email($this->input->get("email"))){
 				        if($lang == "ar"){
 					$response = array("response" => array("httpCode" => 401 , "Message" => "البريد الإلكتروني غير صالحة" ));
 					} else {
@@ -1685,7 +1685,7 @@ class Api_Controller extends Layout_Controller
 					exit;	
 				}   */
 
-				$status = $this->api->registration(arr::to_object($this->input->post()));
+				$status = $this->api->registration(arr::to_object($this->input->get()));
 
 				if($status > 0){
 				
@@ -1747,7 +1747,7 @@ class Api_Controller extends Layout_Controller
 				exit;
 			}			
 	
-		}
+		//}
 		$response[] = array("response" => array("httpCode" => 400 , "Message" => "Invalid method type" ));
 		echo json_encode($response);
 		exit;

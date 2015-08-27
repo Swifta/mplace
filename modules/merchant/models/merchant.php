@@ -2581,7 +2581,6 @@ class Merchant_Model extends Model
         /**  UPDATE THE DELIVERY STATUS OF COD **/
 	public function update_cod_shipping_status($id = "",$type="",$trans_id=0,$product_id=0,$merchant_id=0)
 	{
-			
 			$check = $this->db->count_records('shipping_info',array('shipping_id' =>$id,'delivery_status'=>0));
 			if($check){
 			$get_detail = $this->db->select("deal_merchant_commission","shipping_amount","tax_amount","amount","product_size","quantity")->from('transaction')->where(array("id" =>$trans_id,"product_id" =>$product_id))->get();

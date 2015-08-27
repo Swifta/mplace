@@ -24,7 +24,7 @@ $config["product-compare.html"] = "products/productcompare";
 $config['prodicts/cart.html'] ="/payment_product/cart_products_item";
 $config['cart_checkout.html'] ="/payment_product/cart_checkout_item";
 $config['cart.html'] ="/payment_product/cart_products_item";
-$config['payment_product/cart_order_complete.html'] ="/payment_product/cart_payment_paypal";
+$config['payment_product/cart_payment_paypal.html'] ="/payment_product/cart_payment_paypal";
 $config['payment_product/problem_payment_paypal.html'] ="/payment_product/problem_payment_paypal";
 $config['product/payment_details_friend.html'] ="/payment_product/cart_checkout_item";
 

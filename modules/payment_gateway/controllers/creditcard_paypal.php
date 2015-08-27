@@ -228,7 +228,7 @@ class Creditcard_paypal_Controller extends Layout_Controller
 				
 					
 					
-	                url::redirect(PATH."payment_product/cart_order_complete.html");
+	                url::redirect(PATH."payment_product/cart_payment_paypal.html");
 
 				} else {
 					
@@ -428,7 +428,7 @@ if($_POST){
                $this->referral_amount_payment_deatils = $this->creditcard_paypal_pay->products_referral_amount_payment_deatils($referral_amount);
 				
                 common::message(1, $this->Lang["THANK_FOR_PURCH"]);
-                url::redirect(PATH."payment_product/cart_order_complete.html");
+                url::redirect(PATH."payment_product/cart_payment_paypal.html");
 	       }
 	       else{
 
@@ -541,7 +541,7 @@ if($_POST){
                                 $this->result_transaction = arr::to_object($this->transaction_result);
                                 $this->session->set('payment_result', $this->result_transaction);
                                 //  url::redirect(PATH.'transaction.html');
-                                url::redirect(PATH."payment_product/cart_order_complete.html");
+                                url::redirect(PATH."payment_product/cart_payment_paypal.html");
 
                                 }
 				else {

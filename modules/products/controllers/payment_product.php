@@ -399,8 +399,8 @@ class Payment_product_Controller extends Layout_Controller {
 	   /* PRODUCT PAYMENT PAYPAL */
 	public function cart_payment_paypal()
 	{
-		
-		       foreach($_SESSION as $key=>$value)
+
+	            foreach($_SESSION as $key=>$value)
                 {
 					//if(!is_object($value) && !is_array($value)) {
 							if((is_string($value)) && ($key=='product_cart_id'.$value)){

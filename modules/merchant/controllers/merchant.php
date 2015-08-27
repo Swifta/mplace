@@ -3575,8 +3575,7 @@ class Merchant_Controller extends website_Controller
 		
 		
 		$status = $this->merchant->update_cod_shipping_status($shippingid,$type,$trans_id,$pro_id,$merchant_id);
-						
-						
+		
                         if($type==4) {
                         $message = "Thank You For Your Purchase";
                         $message.= new View("admin_product/shipping_mail_template");
@@ -3587,21 +3586,17 @@ class Merchant_Controller extends website_Controller
                         $message = new View("themes/".THEME_NAME."/admin_mail_template");
                         $fromEmail = NOREPLY_EMAIL;
                                 if(EMAIL_TYPE==2){
-                                	email::smtp($fromEmail,$email_id, SITENAME, $message);
+                                email::smtp($fromEmail,$email_id, SITENAME, $message);
                                 }else{
-                                	email::sendgrid($fromEmail,$email_id, SITENAME, $message);
+                                email::sendgrid($fromEmail,$email_id, SITENAME, $message);
                                 }
-						
                         common::message(1, $this->Lang["MAIL_SENDED"]);
                         }
-						
-						
                         if($status){
-						
                         common::message(1, "Status updated successfully!");
                         $lastsession = $this->session->get("lasturl");
                         if($lastsession){
-                        	url::redirect($lastsession);
+                        url::redirect(PATH.$lastsession);
                         } else {
                         url::redirect(PATH."merchant/cash-delivery.html");
                         }
