@@ -1,9 +1,0 @@
-2015-07-29 17:54:05 +05:30 --- error: Uncaught Kohana_Exception: The requested view, _error/404, could not be found in file C:/wamp/www/ecommerce/system/core/Kohana.php on line 1162
-2015-07-29 18:02:39 +05:30 --- error: Uncaught Kohana_Exception: The requested view, _error/404, could not be found in file C:/wamp/www/ecommerce/system/core/Kohana.php on line 1162
-2015-07-29 18:05:07 +05:30 --- error: Uncaught Kohana_Exception: The requested view, _error/404, could not be found in file C:/wamp/www/ecommerce/system/core/Kohana.php on line 1162
-2015-07-29 18:05:13 +05:30 --- error: Uncaught Kohana_Exception: The requested view, _error/404, could not be found in file C:/wamp/www/ecommerce/system/core/Kohana.php on line 1162
-2015-07-29 18:08:19 +05:30 --- error: Uncaught Kohana_Exception: The requested view, _error/404, could not be found in file C:/wamp/www/ecommerce/system/core/Kohana.php on line 1162
-2015-07-29 18:11:07 +05:30 --- error: Uncaught Kohana_Exception: The requested view, _error/404, could not be found in file C:/wamp/www/ecommerce/system/core/Kohana.php on line 1162
-2015-07-29 18:11:47 +05:30 --- error: Uncaught Kohana_Exception: The requested view, _error/404, could not be found in file C:/wamp/www/ecommerce/system/core/Kohana.php on line 1162
-2015-07-29 18:14:07 +05:30 --- error: Uncaught Kohana_Exception: The requested view, _error/404, could not be found in file C:/wamp/www/ecommerce/system/core/Kohana.php on line 1162
-2015-07-29 20:40:27 +05:30 --- error: Uncaught Kohana_Exception: The requested view, _error/404, could not be found in file C:/wamp/www/ecommerce/system/core/Kohana.php on line 1162
