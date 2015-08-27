@@ -1,0 +1,85 @@
+[33mcommit dc16c63dfe1b32c64214589c63a06af291ba54e6[m
+Author: LivePwndz <pwndz172@gmail.com>
+Date:   Tue Aug 18 15:05:27 2015 +0300
+
+    fix htaccess
+
+[33mcommit 9dfc516cc7b3d786eb501df7537a7644ca25ec81[m
+Author: LivePwndz <pwndz172@gmail.com>
+Date:   Tue Aug 18 15:04:07 2015 +0300
+
+    revert to valid payment files
+
+[33mcommit 3f31687488395a85baa0a07a9f26e8297cbdb661[m
+Author: LivePwndz <pwndz172@gmail.com>
+Date:   Tue Aug 18 12:54:38 2015 +0300
+
+    new remote changes after conflict
+
+[33mcommit 36ce327e072b800bbc2a57de4def98d725536b6a[m
+Merge: 59e4c51 8f89ada
+Author: LivePwndz <pwndz172@gmail.com>
+Date:   Tue Aug 18 12:53:12 2015 +0300
+
+    Merge branch 'master' of https://github.com/Swifta/mplace
+
+[33mcommit 59e4c513c4b10277c0d328122e1fde6e4c9dfd56[m
+Merge: 2d8660e ab7f6e3
+Author: LivePwndz <pwndz172@gmail.com>
+Date:   Tue Aug 18 12:51:03 2015 +0300
+
+    fixing conflicts
+
+[33mcommit 8f89ada7e6b619c08aaa262f5dbabef22a02c223[m
+Author: MUSTAFA <MUSTAFA@MUSTAFA-PC>
+Date:   Tue Aug 18 09:59:46 2015 +0100
+
+    User's Module Model completed to handle club membership.
+
+[33mcommit 2d8660ebae4b3623bb25f929453e421de70921f7[m
+Author: LivePwndz <pwndz172@gmail.com>
+Date:   Tue Aug 18 11:38:34 2015 +0300
+
+    modifying home view to cater for club membership signup
+
+[33mcommit ab7f6e36cc74897fbf27d6c15bbb2b6b93da800a[m
+Author: MUSTAFA <MUSTAFA@MUSTAFA-PC>
+Date:   Tue Aug 18 00:06:57 2015 +0100
+
+    User Registration/Validation MODEL module and Web Services Pushed
+
+[33mcommit c0b8aefdc138ce5aa6b33b9c3ba822573d6579aa[m
+Author: LivePwndz <pwndz172@gmail.com>
+Date:   Mon Aug 17 19:47:11 2015 +0300
+
+    adding of field for \
+
+[33mcommit 0d5028352b374f9ae4210f3887f2be82ac47bb17[m
+Author: LivePwndz <pwndz172@gmail.com>
+Date:   Mon Aug 17 17:46:12 2015 +0300
+
+    Initial working version
+
+[33mcommit bbeee7455c86d305f97f5771621f68d8efdce2f7[m
+Author: LivePwndz <pwndz172@gmail.com>
+Date:   Mon Aug 17 17:27:06 2015 +0300
+
+    another test
+
+[33mcommit d7efddbd51975601386d123414a1367fda0e84de[m
+Author: LivePwndz <pwndz172@gmail.com>
+Date:   Mon Aug 17 14:54:24 2015 +0300
+
+    test
+
+[33mcommit 12c97294956eb39d1e088c08c09e36f7feaacd03[m
+Author: LivePwndz <pwndz172@gmail.com>
+Date:   Mon Aug 17 14:08:44 2015 +0300
+
+    committing the test files
+
+[33mcommit 9c4159adddddd4ee2f12f31e489bf0cc1c2c1f8a[m
+Author: dupsykool <ladmodupe@gmail.com>
+Date:   Mon Aug 17 10:59:47 2015 +0100
+
+    Initial commit
