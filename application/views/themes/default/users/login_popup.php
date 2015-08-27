@@ -41,7 +41,7 @@
               <div class="signup_social_block">                
                       <p><?php echo $this->Lang['SIGN_IN_WITH']; ?></p>
                       <a class="f_connect" onclick="facebookconnect();" title="<?php echo $this->Lang['SIGN_UP_WITH']; ?>">&nbsp;</a>
-                      <p><?php echo $this->Lang['DONT_HAV']; ?> <a class="forget_link" title="<?php echo $this->Lang['SIGN_UP']; ?>" href="javascript:showsignup();"><?php echo $this->Lang['SIGN_UP']; ?></a> </p>                
+                      <p><?php echo $this->Lang['DONT_HAV']; ?> <a class="forget_link" title="<?php echo $this->Lang['SIGN_UP']; ?>" href="javascript:showsignup($('#id_z_offer_click_status').val());"><?php echo $this->Lang['SIGN_UP']; ?></a> </p>                
               </div>
             </div>
         </div>
@@ -151,7 +151,6 @@ function validateForms()
 		}
 		
 		
-		//echo PATH; ?>users/login"
 
 	
 	}

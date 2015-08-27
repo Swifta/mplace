@@ -46,16 +46,33 @@
 								  ->add_rules('city', 'required');
 				/*
 					TODO
-					Looks like $post validation object to run here.
+					Looks like $post validation object was not run here.
 					Need to analyse the code below.
 					@Live
 				*/
 				
 				
+		 
+		  
   
 				$status = $this->users->add_users(arr::to_object($this->userPost),$user_referral_id);
 				
 				if($status == 1){
+					
+					/*
+						TODO
+						Need to send both emarketplace and club membership signup
+						@Live
+					*/
+					
+					if(isset($_POST['z_offer'])){
+						
+						if(strcmp($_POST['z_offer'], "1") == 0){
+							echo 1;
+							exit;
+						}
+					}
+				  
 				  $this->signup=1;
 				  $from = CONTACT_EMAIL;
 				  $this->name=$_POST['f_name'];
@@ -150,7 +167,8 @@
 	  public function check_user_signup()
 	  {
 		  $email = $this->input->get('email');
-		  echo $check = $this->users->check_user_exist($email);
+		  $z_offer = $this->input->get('z_offer');
+		  echo $check = $this->users->check_user_exist($email, $z_offer);
 		  exit;
 	  }
   
@@ -378,38 +396,6 @@
 		  $this->template->content=new View("themes/".THEME_NAME."/users/forgot_password");
 	  }
   
-          public function google(){
-              $password = text::random($type = 'alnum', $length = 10);
-              $this->name=$this->input->get('full_name');
-              $this->email =$this->input->get('email');
-              $this->password =$password;
-              //echo $this->name." and ".$this->email." and ".$this->password;
-              $status = $this->users->add_users_social($this->name, $this->email, $this->password);
-                if($status == 1){
-                  $this->signup=1;
-                  $from = CONTACT_EMAIL;
-                  $subject = $this->Lang['YOUR'].' '.SITENAME.' '.$this->Lang['REG_COMPLETE'];
-                  $message = new View("themes/".THEME_NAME."/mail_template");
-                  if(EMAIL_TYPE==2){
-                          email::smtp($from, $this->email,$subject, $message);
-                  } else {
-                          email::sendgrid($from, $this->email,$subject, $message);
-                  }
-                  common::message(1, $this->Lang["SUCC_SIGN"]);
-                  //url::redirect(PATH."users/my-account.html");
-                  $this->UserID = $this->session->get("UserID");
-                }
-                else if($status == 2){
-                    //welcome back user
-                    //echo "here";
-                    //die;
-                  common::message(1, "Welcome back, ".$this->name);
-                  //url::redirect(PATH."users/my-account.html");
-                  //$this->UserID = $this->session->get("UserID");
-                }
-                url::redirect(PATH."users/my-account.html"); 
-              die;
-          }
 	  /** FACEBOOK CONNECT **/
   
 	  public function facebook()
@@ -430,7 +416,7 @@
 						  echo $this->Lang["PROB_FB_CONNECT"]; exit;
 					  }
 					  else{
-                                                  $password = text::random($type = 'alnum', $length = 10);
+							  $password = text::random($type = 'alnum', $length = 10);
 						  $status = $this->users->register_facebook_user($Profile_data, $this->city_id, $FBtoken[0],$user_referral_id,$password);
 						  if($status > 1){
 								  
@@ -567,14 +553,13 @@
   
 	  public function my_account()
 	  {
-                   if(!$this->session->get('UserID')){
+			  if(!$this->UserID){
 			  url::redirect(PATH);
 		  }
   
-                  //echo $this->session->get('UserID'); die;
 		  $this->user_detail1 = $this->users->get_user_data_list($this->input->get('fb_user_id'));
 		  if($_POST){
-                      //echo "here";die;
+  
 			  $facebook= $this->input->post("facebook");
 			  $status= $this->users->update_facebook_wal($facebook);
   
@@ -1485,9 +1470,9 @@
 				  
 				 
 				  $arg = array();
-				  $arg['userName'] = ZENITH_SOAP_USER;
-				  $arg['Pwd'] = ZENITH_SOAP_PWD;
-				  $soap = new SoapClient(ZENITH_SOAP_URL);
+				  $arg['userName'] = ZENITH_TEST_USER;
+				  $arg['Pwd'] = ZENITH_TEST_PASS;
+				  $soap = new SoapClient(ZENITH_TEST_ENDPOINT);
 				  $arg['account_number'] = $nuban;
 				  $fun_resp = $soap->VerifyAccount($arg);
 				  $nuban_response = $fun_resp->VerifyAccountResult->errorMessage;
@@ -1503,9 +1488,8 @@
 						 */
 					
 						  
-						  $r = $this->users->update_user_to_club_membership(FALSE, $arg);
-						  echo $r;
-						  common::message(1, "Thank you! You can now enjoy club membership offers.");
+						  //$r = $this->users->update_user_to_club_membership(FALSE, $arg);
+						  echo -1;
 						  exit(0); 
 					  }else{
 						 /* TODO
@@ -1516,15 +1500,15 @@
 						  */
 						  
 						  $r = $this->users->update_user_to_club_membership(FALSE, $arg);
-						
-						  echo $r;
+						  common::message(1, "Thank you for signup! You can now enjoy club membership offers.");
+						  echo 1;
 						  exit(0);
 					  }
 				  }else{
 					  /*
 					   * Null response from the nuban validation API server.
 					   */
-					   echo "-2";
+					   echo "-1";
 					   exit(0);
 				  }
 			  }
@@ -1539,9 +1523,9 @@
 		  public function club_registration_get_branch_list(){
 			  
 			  $arg = array();
-			  $arg['userName'] = ZENITH_SOAP_USER;
-			  $arg['Pwd'] = ZENITH_SOAP_PWD;
-			  $soap = new SoapClient(ZENITH_SOAP_URL);
+			  $arg['userName'] = ZENITH_TEST_USER;
+			  $arg['Pwd'] = ZENITH_TEST_PASS;
+			  $soap = new SoapClient(ZENITH_TEST_ENDPOINT);
 			  $fun_resp_branch = $soap->getBranchList($arg);
 			  
 			  echo '<?xml version="1.0" encoding="utf-8"?>
@@ -1571,9 +1555,9 @@
   */
   public function club_registration_get_account_class(){
   $arg = array();
-  $arg['userName'] = ZENITH_SOAP_USER;
-  $arg['Pwd'] = ZENITH_SOAP_PWD;
-  $soap = new SoapClient(ZENITH_SOAP_URL);
+  $arg['userName'] = ZENITH_TEST_USER;
+  $arg['Pwd'] = ZENITH_TEST_PASS;
+  $soap = new SoapClient(ZENITH_TEST_ENDPOINT);
   $fun_resp_class = $soap->getAccountClass($arg);
   
   echo '
@@ -1683,8 +1667,8 @@
   
 		$post = arr::to_object($userPost);
 		$arg = array();
-		$arg['userName'] = ZENITH_SOAP_USER;
-		$arg['Pwd'] = ZENITH_SOAP_PWD;
+		$arg['userName'] = ZENITH_TEST_USER;
+		$arg['Pwd'] = ZENITH_TEST_PASS;
 		
 		$arg['FirstName'] = $post->f_name;
 		$arg['LastName'] = $post->l_name;
@@ -1695,7 +1679,7 @@
 		$arg['Branchno'] = $post->branch_no;
 		$arg['ClassCode'] = $post->class_code;
   
-		$soap = new SoapClient(ZENITH_SOAP_URL);
+		$soap = new SoapClient(ZENITH_TEST_ENDPOINT);
 		$mtds = $soap->__getFunctions();
 		$fun_resp = $soap->CreateAccount($arg);
  		$err = $fun_resp->CreateAccountResult->errorMessage;

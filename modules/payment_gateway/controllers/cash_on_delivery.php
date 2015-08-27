@@ -146,8 +146,8 @@ class Cash_on_delivery_Controller extends Layout_Controller
 	                $this->result_transaction = arr::to_object($this->transaction_result);
 	                $this->session->set('payment_result', $this->result_transaction);
 	               // url::redirect(PATH.'transaction.html');
-
-				url::redirect(PATH."payment_product/cart_payment_paypal.html");
+					$this->session->set('p_payment_type', 'COD');
+				url::redirect(PATH."payment_product/cart_order_complete.html");
 
 
 			}

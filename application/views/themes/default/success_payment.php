@@ -36,7 +36,16 @@
 					<div class="bread_crumb">
                         <ul>
                             <li><p><a href="<?php echo PATH; ?>" title="<?php echo $this->Lang['HOME']; ?>"><?php echo $this->Lang['HOME']; ?></a></p></li>
-                            <li><p><?php echo $this->Lang['PAY_SUCC']; ?></p></li>
+                            <li><p><?php 
+							
+							if(isset($_SESSION['p_payment_type']) && strcmp($_SESSION['p_payment_type'], "COD") == 0){
+								
+								echo $this->Lang['ORD_COMPL_COD'];
+								
+							}else{
+								echo $this->Lang['PAY_SUCC'];
+							}
+							?></p></li>
                         </ul>
                     </div>
 
@@ -45,7 +54,20 @@
                     <!--content start-->
                     <div class="payouter_block pay_br">
                         <!--Blog content starts-->                        
-                            <h3 class="paybr_title pay_titlebg"><?php echo $this->Lang['PAY_SUCC']; ?>                            
+                            <h3 class="paybr_title pay_titlebg">
+                            
+                            <?php 
+							
+							if(isset($_SESSION['p_payment_type']) && strcmp($_SESSION['p_payment_type'], "COD") == 0){
+								
+								echo $this->Lang['ORD_COMPL_COD'];
+								
+							}else{
+								echo $this->Lang['PAY_SUCC'];
+							}
+							
+							?>
+							                           
                             </h3>
                             <div class="p_inner_block clearfix">
                                   
@@ -60,7 +82,21 @@
 
                                         <div class="payment_suc_content">
                                             <h1><?php echo $this->Lang["ORDER_STATUS"]; ?></h1>
-                                            <h2><?php echo $this->Lang["YOUR_PAYMENT_SUCCESS"]; ?></h2>
+                                            <h2>
+											
+                                            <?php
+											
+												if(isset($_SESSION['p_payment_type']) && strcmp($_SESSION['p_payment_type'], "COD") == 0){
+								
+													echo $this->Lang['ORD_COMPL_COD'];
+													
+												}else{
+													
+													echo $this->Lang["YOUR_PAYMENT_SUCCESS"];
+												}
+											
+											?>
+											</h2>
 											<?php $R = $this->result; ?>
                                             <ul>
 												<?php if(isset($R->TIMESTAMP)){ ?>
@@ -148,7 +184,9 @@
 
 
 
-                        </div> */ ?>
+                        </div> */ 
+						unset($_SESSION['p_payment_type']);
+						?>
                     </div>
                     <!--Blog content ends-->
                 </div>

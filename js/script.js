@@ -194,15 +194,6 @@ function facebookconnect()
   checkChild();    
 }
 
-function googleconnect()
-{
-
-  //window.open('/facebook-post-deals.php',null,'width=750,location=0,status=0,height=500');
-
-   
-}
-
-
 var win3;
 function facebook_connect_post()
 {

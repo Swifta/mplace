@@ -17,6 +17,7 @@ class Webservices_Controller extends Layout_Controller
             $key = $this->input->get('key');
             $trnx = $this->input->get('transaction_id');
             $amount = $this->input->get('amount');
+            $loop = 0;
             $result = json_decode($this->webservices->get_details($admin, $key, $trnx, $amount));
             if($result->success){
                 $ret['status'] = true;

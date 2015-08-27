@@ -317,7 +317,7 @@ class Authorize_Controller extends Layout_Controller
 						$this->session->set('payment_result', $this->result_transaction);
 						//url::redirect(PATH.'transaction.html');
 						common::message(1, "Transaction successful. Thanks for shopping with E Marketplace!");
-                        url::redirect(PATH."payment_product/cart_payment_paypal.html");
+                        url::redirect(PATH."payment_product/cart_order_complete.html");
                     }   else {
                     $responseheader = array('Error'=>$response->response_reason_text,'Error code'=>$response->response_reason_code,'Authorization Code'=>'Not Authorized','Credit card'=>$response->card_type,'Billing Address'=>$response->address);
                     common::message(-1, $response->response_reason_text);
@@ -425,7 +425,7 @@ class Authorize_Controller extends Layout_Controller
 				            $status = $this->authorize->update_captured_transaction_failed($transaction);
 				          }
 
-                        url::redirect(PATH."payment_product/cart_payment_paypal.html");
+                        url::redirect(PATH."payment_product/cart_order_complete.html");
 
                     }   else {
                     $responseheader = array('Error'=>$response->response_reason_text,'Error code'=>$response->response_reason_code,'Authorization Code'=>'Not Authorized','Credit card'=>$response->card_type,'Billing Address'=>$response->address);

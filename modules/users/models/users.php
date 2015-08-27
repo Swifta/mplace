@@ -122,9 +122,9 @@ class Users_Model extends Model
         public function club_registration_get_account_class(){
             $ret = array();
             $arg = array();
-            $arg['userName'] = ZENITH_SOAP_USER;
-            $arg['Pwd'] = ZENITH_SOAP_PWD;
-            $soap = new SoapClient(ZENITH_SOAP_URL);
+            $arg['userName'] = ZENITH_TEST_USER;
+            $arg['Pwd'] = ZENITH_TEST_PASS;
+            $soap = new SoapClient(ZENITH_TEST_ENDPOINT);
             $fun_resp_class = $soap->getAccountClass($arg);
             foreach($fun_resp_class->getAccountClassResult->ClassCode as $value){
                 $ret[$value->ClassCodes] = $value->ClassName;
@@ -138,9 +138,9 @@ class Users_Model extends Model
          */
         public function club_verify_account_number($nuban){
             $arg = array();
-            $arg['userName'] = ZENITH_SOAP_USER;
-            $arg['Pwd'] = ZENITH_SOAP_PWD;
-            $soap = new SoapClient(ZENITH_SOAP_URL);
+            $arg['userName'] = ZENITH_TEST_USER;
+            $arg['Pwd'] = ZENITH_TEST_PASS;
+            $soap = new SoapClient(ZENITH_TEST_ENDPOINT);
             $arg['account_number'] = $nuban;
             $fun_resp = $soap->VerifyAccount($arg); //call the soap api to validate
             if($fun_resp->VerifyAccountResult->errorMessage != ""){
@@ -165,9 +165,9 @@ class Users_Model extends Model
         public function club_registration_new_not_registered($post = "" , $user_referral_id = ""){
             //before registering the user. I will have to check if user account is valid
             $arg = array();
-            $arg['userName'] = ZENITH_SOAP_USER;
-            $arg['Pwd'] = ZENITH_SOAP_PWD;
-            $soap = new SoapClient(ZENITH_SOAP_URL);
+            $arg['userName'] = ZENITH_TEST_USER;
+            $arg['Pwd'] = ZENITH_TEST_PASS;
+            $soap = new SoapClient(ZENITH_TEST_ENDPOINT);
             $arg['account_number'] = $post->account_number;
             $fun_resp = $soap->VerifyAccount($arg); //call the soap api to validate
             if($fun_resp->VerifyAccountResult->errorMessage != ""){
@@ -258,42 +258,6 @@ class Users_Model extends Model
 			}
 		} else { return -1; }
 	}
-        
-        
-	    public function add_users_social($full_name="", $email="", $password = "", $user_referral_id = "")
-	    {
-                $new_user = false;
-                $referral_id = text::random($type = 'alnum', $length = 8);
-                $referred_user_id = 0;
-                if($this->check_user_exist($email) == 1){
-                    $new_user = true;
-                    $result = $this->db->insert("users", array("firstname" => $full_name, "email" => $email, 
-                        "password" =>  md5($password), "referral_id" => $referral_id, "referred_user_id" =>$referred_user_id, 
-                        "joined_date" => time(),"last_login" => time(), "user_type"=> 4,"city_id" => 1, "country_id" => 1));
-                        $this->session->set(array("UserID" => $result->insert_id(), "UserName" => $full_name, 
-                            "UserEmail" => $email, "city_id" => 1, "country_id" => 1,
-                            "UserType" => 4, "Club"=>0));
-                }
-                else{
-                    $result = $this->db->from("users")->where(array("email" => $email,"user_type" =>4))->get();
-                    if(count($result) == 1){
-                            foreach($result as $a){
-                                    if($a->user_status == 1){ 
-
-                                            $this->session->set(array("UserID" => $a->user_id, "UserName" => $a->firstname , "UserEmail" => $a->email, 
-                                                "city_id" => $a->city_id,"UserType" => $a->user_type, "Club"=>$a->club_member));
-
-                                    }
-                            }
-                    }
-                }
-                if($new_user){
-                    return 1;
-                }
-                else{
-                    return 2;
-                }
-            }
 	
 	    /** REGISTER USERS **/
 
@@ -415,10 +379,12 @@ class Users_Model extends Model
 	
 	/** CHECK USER EXIST **/
 	
-	public function check_user_exist($email = "")
+	public function check_user_exist($email = "", $z_offer = "0")
 	{
 		$result = $this->db->from('users')->where(array('email' => $email))->get();
 		if(count($result) == 0){
+			if(strcmp($z_offer, "1") == 0)
+				return -999;
 			return 1;
 		}
 		return -1;

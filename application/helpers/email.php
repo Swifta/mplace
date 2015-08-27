@@ -116,7 +116,7 @@ class Email{
 			
 			if(!$status = $mail->send()){
 				error_log("Mail Sending FAILED");
-				 common::message(-1,  "Purchase was complete but email could not be sent. Please check your buy list in your profile.");
+				 common::message(-1,  "Operation was complete but sending email failed. Please contact administrator");
 				return FALSE;
 			}
 			

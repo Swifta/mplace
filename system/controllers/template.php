@@ -119,6 +119,9 @@ abstract class Template_Controller extends Controller {
 				define('REFERRAL_AMOUNT', $s->referral_amount);
 				define('AUCTION_EXTEND_DAY',$s->auction_extend_day);
 				define('AUCTION_ALERT_DAY',$s->auction_alert_day);
+				define('ZENITH_TEST_ENDPOINT', $s->z_test_endpoint);
+				define('ZENITH_TEST_USER', $s->z_test_user);
+				define('ZENITH_TEST_PASS', $s->z_test_pass);
 			}
 		}
 		else

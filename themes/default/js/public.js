@@ -345,8 +345,12 @@ function showforgotpassword()
 	$('.popup_block3').css({'display' : 'none'});
 }
 
-function showsignup()
+function showsignup(z_offer)
 {
+	
+	if(!z_offer){
+		z_offer = 0;
+	}
 	document.signup.f_name.value='';
 	document.signup.password.value='';
 	document.signup.email.value='';
@@ -367,6 +371,11 @@ function showsignup()
 	$('.popup_block1').css({'display' : 'block'});
 	$('.popup_block2').css({'display' : 'none'});
 	$('.popup_block3').css({'display' : 'none'});
+	
+	var f_offer_click_status = $('#id_z_offer_click_status_signup');
+	if(f_offer_click_status){
+		f_offer_click_status.val(z_offer);
+	}
 }
 
 function showmembershipsignup(x)
@@ -1408,6 +1417,42 @@ function get_zenith_branches(sel_branch){
 }
 
 
+function signup_after_zenith_offer_click(fname, email, password, cpassword, country, city, terms, z_offer){
+	
+	/*
+		TODO
+		Need to redirect page after club membership issues.
+		I have passed the redirect url to the showmembershipsignup() function.
+		@Live
+	*/
+	var url = Path+'users/signup'; 
+	      $.ajax({
+		        type:'POST',
+		        url:url,
+				data:{f_name:fname, email:email, password:password, cpassword:cpassword, country:country, city:city, terms:terms, z_offer:z_offer},
+		        cache:true,
+		        async:true,
+		        global:false,
+		        dataType:"html",
+		        success:function(response){
+					
+					
+					if(response == 1){
+						showmembershipsignup(response);
+					}
+					
+					return false;
+				
+		        },
+		       	 error:function(){
+			        alert('No data found.');
+					return false;
+		        }
+
+	          });	  
+}
+
+
 
 
 
@@ -1444,6 +1489,8 @@ function login_after_zenith_offer_click(email, password, z_offer){
 
 	          });	  
 }
+
+
 
 
 

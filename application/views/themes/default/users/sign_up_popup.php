@@ -1,12 +1,3 @@
-    <script type="text/javascript">
-  (function() {
-    var po = document.createElement('script');
-    po.type = 'text/javascript'; po.async = true;
-    po.src = 'https://plus.google.com/js/client:plusone.js';
-    var s = document.getElementsByTagName('script')[0];
-    s.parentNode.insertBefore(po, s);
-  })();
-    </script>
 <div class="shadow_bg"></div>
             <div class="sign_up_outer">  	                        
                     <div class="sign_up_logo">
@@ -85,40 +76,19 @@
                             </li>
                             <li>                                  
                                 <input class="sign_submit" type="submit" title="Sign Up" value="Sign Up" /> 
+                                <input id = "id_z_offer_click_status_signup" type="hidden" value="0"/>
                             </li>
                             </ul>
                         </form>
                     </div>
                     <div class="signup_social_block">                        
                         <p><?php echo $this->Lang['SIGN_IN_WITH']; ?>..</p>
-                        <div style="text-align: center;display:">
                         <a class="f_connect" onclick="facebookconnect();" title="<?php echo $this->Lang['FB_CONN']; ?>">&nbsp;</a>
-<br />
-    <button class="g-signin g_connect" 
-            data-scope="https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/userinfo.email"
-            data-requestvisibleactions="http://schemas.google.com/AddActivity"
-            data-clientId="997154646959-uttoqigl36r6gpg5a4eht2tn9jru7taq.apps.googleusercontent.com"
-            data-accesstype="offline"
-            data-callback="signinCallback"
-            data-theme="dark"
-            data-cookiepolicy="single_host_origin">
-    </button>
-<!--<button class="g-signin g_connect"
-        data-scope="https://www.googleapis.com/auth/plus.login"
-        data-clientid="997154646959-uttoqigl36r6gpg5a4eht2tn9jru7taq.apps.googleusercontent.com"
-        data-callback="signinCallback"
-        data-theme="dark"
-        data-cookiepolicy="single_host_origin"
-        data-requestvisibleactions="http://schemas.google.com/AddActivity"
-        data-width="wide">Hello
-    </button>--><br />
-                        <a class="t_connect" onclick="disconnectUser();" title="<?php echo $this->Lang['TWITTER_CONN']; ?>">&nbsp;</a>
-                        </div>
                         <p><?php echo $this->Lang['ALREADY_A_MEMBER']; ?> <a class="forget_link" title="<?php echo $this->Lang['SIGN_IN']; ?> " href="javascript:showlogin();"><?php echo $this->Lang['SIGN_IN']; ?> </a> </p>                                                   
                     </div>
                 </div>                          
             </div>
-
+              
 
 <script type="text/javascript">
 $(document).ready(function(){
@@ -144,95 +114,6 @@ $('#close1').live('click', function() {
     });
 });
 
-var token;
-var full_name;
-var gpclass = (function(){
-
-//Defining Class Variables here
-var response = undefined;
-return {
-        //Class functions / Objects
-
-        mycoddeSignIn:function(response){
-                // The user is signed in
-                if (response['access_token']) {
-                    token = response['access_token'];
-                        //Get User Info from Google Plus API
-                        gapi.client.load('plus','v1',this.getUserInformation);
-
-                } else if (response['error']) {
-                        // There was an error, which means the user is not signed in.
-                        //alert('There was an error: ' + authResult['error']);
-                }
-        },
-
-        getUserInformation: function(){
-                var request = gapi.client.plus.people.get( {'userId' : 'me'} );
-                request.execute( function(profile) {
-                        var email = profile['emails'].filter(function(v) {
-                                return v.type === 'account'; // Filter out the primary email
-                        })[0].value;
-                        var fName = profile.displayName;
-                        //alert(fName);
-                        //alert(email);
-                        disconnectUser();
-                        location.href='/ecommerce/google-connect.php?full_name='+fName+'&email='+email
-                        //$("#inputFullname").val(fName);
-//                        /$("#inputEmail").val(email);
-                        
-                });
-        }
-
-}; //End of Return
-})();
-
-function signinCallback(gpSignInResponse) {
-    gpclass.mycoddeSignIn(gpSignInResponse);
-//  if (authResult['access_token']) {
-//    // Successfully authorized
-//    token = authResult['access_token'];
-//    //gapi.client.setApiKey('997154646959-uttoqigl36r6gpg5a4eht2tn9jru7taq.apps.googleusercontent.com'); //set your API KEY
-//    //gapi.client.load('plus', 'v1',function(){});//Load Google + API
-//
-//   alert("here");
-//    //then redirect to URL
-//    //location.href='/ecommerce/google-connect.php?full_name='+fullName+'&email=';
-//    //document.getElementById('signinButton').setAttribute('style', 'display: none');
-//
-//  } else if (authResult['error']) {
-//    // There was an error.
-//    // Possible error codes:
-//    //   "access_denied" - User denied access to your app
-//    //   "immediate_failed" - Could not automatially log in the user
-//    // console.log('There was an error: ' + authResult['error']);
-//    alert("Failed");
-//  }
-}
-
-function disconnectUser() {
-  var revokeUrl = 'https://accounts.google.com/o/oauth2/revoke?token=' +
-      token;
-
-  // Perform an asynchronous GET request.
-  $.ajax({
-    type: 'GET',
-    url: revokeUrl,
-    async: false,
-    contentType: "application/json",
-    dataType: 'jsonp',
-    success: function(nullResponse) {
-      // Do something now that user is disconnected
-      // The response is always undefined.
-    },
-    error: function(e) {
-      // Handle the error
-      // console.log(e);
-      // You could point users to manually disconnect if unsuccessful
-      // https://plus.google.com/apps
-    }
-  });
-}
-
 function validatesignup()
 {
 		
@@ -245,6 +126,11 @@ function validatesignup()
 	var terms = document.getElementById('termsquantity').checked;
 	var atpos=email.indexOf("@");
 	var dotpos=email.lastIndexOf(".");
+	var z_offer = $('#id_z_offer_click_status_signup').val();
+	
+	
+	
+	
 	if(fname == '' || email =='' || password == '' || cpassword == ''|| terms == 'false' || (atpos<1 || dotpos<atpos+2 || dotpos+2>=email.length) || city == '-99'|| city == '')
 	{
 		if(fname == ''){
@@ -333,8 +219,9 @@ function validatesignup()
 		        $('#terms_error').html("<?php echo $this->Lang['PLEASE_SELECT_TERMS']; ?>");
 		        return false;
                 }
-		var url= Path+'users/check_user_signup/?email='+email;
+		var url= Path+'users/check_user_signup/?email='+email+'&z_offer='+z_offer;
 		$.post(url,function(check){
+			
 			if(check == -1){
 				$('#emai_error').html("<?php echo $this->Lang['EMAIL_EXIST']; ?>");
 				
@@ -343,6 +230,11 @@ function validatesignup()
 				$('#city_error').html('');
 				return false;
 			}
+			else if(check == -999){
+					javascript:signup_after_zenith_offer_click(fname, email, password, cpassword, country, city, terms, z_offer);
+					return false;
+					
+				}
 			
 			document.signup.submit();
 		});

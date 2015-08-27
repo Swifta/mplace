@@ -6,11 +6,6 @@
  */
 $config['site_domain'] = '/';
 
-define("ZENITH_SOAP_URL","https://41.203.113.12/OnlineAcct/Service.asmx?WSDL");
-define("ZENITH_SOAP_USER", "TestUser");
-define("ZENITH_SOAP_PWD",  "*pass1234*");
-
-
 /**
  * Force a default protocol to be used by the site. If no site_protocol is
  * specified, then the current protocol is used, or when possible, only an
