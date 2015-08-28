@@ -1530,7 +1530,7 @@ $content_text = array(
 
 "ZENITH_SEL_CLASS" => "Select class",
 
-"ORD_COMPL_COD" => "Purchase Complete. Please await shipping updates from merchant.",
+"ORD_COMPL_COD" => "Your Order is Successful. Please await shipping updates from merchant.",
 
     
 

@@ -8,6 +8,9 @@ class Webservices_Model extends Model
 	}
         
         public function get_details($admin, $key, $transaction_id, $amount){
+            $ret = array();
+            $ret['success'] = false;
+            $ret['msg'] = "Invalid User Credentials";
             $result = $this->db->query("SELECT * FROM users WHERE email='".$admin."' AND password=md5('".$key."')");
             if(count($result) == 1){
 	         $result = $this->db->from("transaction")
@@ -16,7 +19,6 @@ class Webservices_Model extends Model
                             ->join("users","users.user_id","transaction.user_id")
                             ->join("city","city.city_id","users.city_id")
                             ->get();
-                 $ret = array();
                 if(count($result) > 0){
                     $total_amount = 0;
                     $loop = 0;
