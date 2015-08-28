@@ -258,6 +258,41 @@ class Users_Model extends Model
 			}
 		} else { return -1; }
 	}
+        
+	    public function add_users_social($full_name="", $email="", $password = "", $user_referral_id = "")
+	    {
+                $new_user = false;
+                $referral_id = text::random($type = 'alnum', $length = 8);
+                $referred_user_id = 0;
+                if($this->check_user_exist($email) == 1){
+                    $new_user = true;
+                    $result = $this->db->insert("users", array("firstname" => $full_name, "email" => $email, 
+                        "password" =>  md5($password), "referral_id" => $referral_id, "referred_user_id" =>$referred_user_id, 
+                        "joined_date" => time(),"last_login" => time(), "user_type"=> 4,"city_id" => 1, "country_id" => 1));
+                        $this->session->set(array("UserID" => $result->insert_id(), "UserName" => $full_name, 
+                            "UserEmail" => $email, "city_id" => 1, "country_id" => 1,
+                            "UserType" => 4, "Club"=>0));
+                }
+                else{
+                    $result = $this->db->from("users")->where(array("email" => $email,"user_type" =>4))->get();
+                    if(count($result) == 1){
+                            foreach($result as $a){
+                                    if($a->user_status == 1){ 
+
+                                            $this->session->set(array("UserID" => $a->user_id, "UserName" => $a->firstname , "UserEmail" => $a->email, 
+                                                "city_id" => $a->city_id,"UserType" => $a->user_type, "Club"=>$a->club_member));
+
+                                    }
+                            }
+                    }
+                }
+                if($new_user){
+                    return 1;
+                }
+                else{
+                    return 2;
+                }
+            }
 	
 	    /** REGISTER USERS **/
 
