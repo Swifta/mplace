@@ -1462,57 +1462,46 @@
 		  		
 			  $nuban = $this->input->post('nuban');
 			  if($this->session->get("Club") == 1){
-				  
+				
 				  echo -1; //user is club member already.
 				  exit(0);
 			  }
 			  else{
-				  
-				 
+				
 				  $arg = array();
 				  $arg['userName'] = ZENITH_TEST_USER;
 				  $arg['Pwd'] = ZENITH_TEST_PASS;
 				  $soap = new SoapClient(ZENITH_TEST_ENDPOINT);
 				  $arg['account_number'] = $nuban;
 				  $fun_resp = $soap->VerifyAccount($arg);
-				  $nuban_response = $fun_resp->VerifyAccountResult->errorMessage;
 				  
-				  if($nuban_response){
-					  $nuban_response = trim($nuban_response);
-					  if($nuban_response != ""){
-						 /*
-						 	TODO
-							This needs to be cleared(deleted).
-							Only testing local account update whether account verified positive/negative.
-							@Live
-						 */
-					
-						  
-						  //$r = $this->users->update_user_to_club_membership(FALSE, $arg);
-						  echo -1;
-						  exit(0); 
-					  }else{
-						 /* TODO
-						 	Need to hand update status at the client side.
-							It's returned put not handled.
-						  * update user profile to membership using using the object $this->users;
-						  	@Live
-						  */
-						  
-						  $r = $this->users->update_user_to_club_membership(FALSE, $arg);
-						  common::message(1, "Thank you for signup! You can now enjoy club membership offers.");
-						  echo 1;
-						  exit(0);
+				  $response = (array)$fun_resp->VerifyAccountResult;
+					  if($response){
+						  $nuban_response = (isset($response['errorMessage']))?-1:1;
+						 
+						  if($nuban_response == 1){
+							  
+							   $r = $this->users->update_user_to_club_membership(FALSE, $arg);
+								common::message(1, "Thank you for signup! You can now enjoy club membership offers.");
+								if($r == 1){
+									 $urlreferer = (isset($_SERVER['HTTP_REFERER']))?$_SERVER['HTTP_REFERER']:PATH;
+									 echo $urlreferer;
+									 exit;
+								}else{
+									
+									echo -2;
+								}
+								
+								exit;	
+							  
+						  }
 					  }
-				  }else{
-					  /*
-					   * Null response from the nuban validation API server.
-					   */
-					   echo "-1";
-					   exit(0);
-				  }
+						  echo -1;
+						  exit;
+				 
 			  }
-			  }
+			  
+			 }
 		  }
 		  
 		  
@@ -1609,8 +1598,9 @@
   
   if($status && strcmp($status, "1") == 0){
   
-		common::message(1, "Wahoo! Your Zenith bank account was successfully created. please check it out in your profile.");
-		url::redirect(PATH);
+		common::message(1, "Thank you! Your Zenith bank account has been successfully created. please check it out in your profile.");
+		$urlreferer = (isset($_SERVER['HTTP_REFERER']))?$_SERVER['HTTP_REFERER']:PATH;
+		url::redirect($urlreferer);
   
   }elseif($status && strcmp($status, "-1") == 0){
   
@@ -1682,24 +1672,29 @@
 		$soap = new SoapClient(ZENITH_TEST_ENDPOINT);
 		$mtds = $soap->__getFunctions();
 		$fun_resp = $soap->CreateAccount($arg);
- 		$err = $fun_resp->CreateAccountResult->errorMessage;
+ 		$response = (array)$fun_resp->CreateAccountResult;
+		$err = (isset($response['errorMessage']))?-1:1;
 		
+		if($err == -1){
+			
+			echo $err;
+			exit;
+			
+		}
+		
+		$r = $this->users->update_user_to_club_membership(TRUE, $response);
+		if($r == 1){
+			echo $r;
+			common::message(1, "Thank you! Your Zenith bank account has been successfully created. please check it out in your profile.");
+			$urlreferer = (isset($_SERVER['HTTP_REFERER']))?$_SERVER['HTTP_REFERER']:PATH;
+			url::redirect($urlreferer);
+			exit;
+			
+		}else{
+			echo -2;
+		}
+		exit;
 				
-				if($err){
-					$err= trim($err);
-					if( $err != ""){
-						echo $err;
-						exit(0);
-					}else{
-						echo 1;
-						exit(0);
-					}
- 				 }else{
-					 
-					 echo 1;
-					 exit(0);
-					 
-				 }
   }else{
 	  
 		/*

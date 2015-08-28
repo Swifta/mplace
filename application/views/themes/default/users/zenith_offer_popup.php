@@ -307,6 +307,11 @@ $('#submit_acc').click(function() {
 		        success:function(check)
 		        {
 					is_z_verify_account_api_running = false;
+					if(isNaN(check)){
+						window.location.href = check;
+						return;
+					}
+					
 					/*
 					  TODO
 					  Need to internationalize the string below.
@@ -318,25 +323,12 @@ $('#submit_acc').click(function() {
 						return;
 					}
 					
-					/*
-						TODO
-						After successful verification(We will fake it for now
-						since the API endpoint is still down),
-						we need to redirect the user back to their original page.
-						At the moment, we redirect to home page
+					
+					
+					$('#z_acc_error').html("<?php echo "Something went wrong. Please contact site admin."; ?>");
+					return;
 						
-						@Live
-					*/
-					
-					if(check == 1){
-						window.location.href = Path;
-						
-					}else{
-						alert(check);
-						exit(0);
-					}
-					
-					
+			
 				 
 		          
 		        },

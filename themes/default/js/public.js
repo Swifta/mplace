@@ -1527,7 +1527,7 @@ function open_zenith_account(){
 	//var n9 = $(fs[8]).attr('name'); 
 	var v9 = $(fs[8]).val();
 	
-	
+	$('#terms_err').text('');
 	
 	var params_obj = {
 		
@@ -1561,7 +1561,8 @@ function open_zenith_account(){
 					}catch(e){
 					}
 					
-					if(res){
+					
+					if(isNaN(response) && res){
 						var error_obj = res.children();
 						if(error_obj){
 							var errors = error_obj.children().children();
@@ -1576,11 +1577,21 @@ function open_zenith_account(){
 					
 					}
 					
-				window.location.href = Path+"users/club_open_bank_account_user/"+response;
-				return;
+					
+					if(isNaN(response)){
+						
+						return false;
+						
+					}else{
+						$('#terms_err').text("Sorry, something went wrong opening your account. Please try again.");
+						
+						exit;
+						
+					}
+					
 				
-				 //window.location.href = Path+"cart.html" ;
-		        document.getElementById("item_count").innerHTML=check;
+				return;
+		
 		        },
 		       	 error:function(){
 					is_z_open_account_api_running = false;
