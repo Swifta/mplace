@@ -27,9 +27,10 @@
                         $('.befor_login').hide();
                         $('.cancel_login').show();
                 <?php } ?>
-				
+		$('.befor_login').hide();		
                 $('.AuthorizeNet_pay').hide();
                 $('.cash_pay').hide();
+                $('.interswitch_pay').hide();
                 $('.what_happens').hide();
                 $('.what_buygift').hide();
                 $('.can_change').hide();
@@ -69,6 +70,7 @@
                 $('.error').html('');
                 $('.cancel_login').show();
                 $('.befor_login').hide();
+                $('.interswitch_pay').hide();
                 $('.AuthorizeNet_pay').hide();
                 $('.cash_pay').hide();
         }
@@ -76,6 +78,7 @@
                 $('.error').html('');
                 $('.befor_login').show();
                 $('.cancel_login').hide();
+                $('.interswitch_pay').hide();
                 $('.AuthorizeNet_pay').hide();
                 $('.cash_pay').hide();
         }
@@ -83,15 +86,25 @@
                 $('.error').html('');
                 $('.befor_login').hide();
                 $('.cancel_login').hide();
+                $('.interswitch_pay').hide();
                 $('.AuthorizeNet_pay').show();
                 $('.cash_pay').hide();
         }
         function cash_delivery() {
                 $('.error').html('');
                 $('.cash_pay').show();
+                $('.interswitch_pay').hide();
                 $('.befor_login').hide();
                 $('.cancel_login').hide();
                 $('.AuthorizeNet_pay').hide();
+        }
+        function InterswitchPay(){
+                $('.error').html('');
+                $('.cash_pay').hide();
+                $('.interswitch_pay').show();
+                $('.befor_login').hide();
+                $('.cancel_login').hide();
+                $('.AuthorizeNet_pay').hide();            
         }
 </script>
 <script type="text/javascript"> 
@@ -480,10 +493,13 @@
                 <h3 class="paybr_title pay_titlebg"><?php echo $this->Lang['TYPE_PAY']; ?></h3>
                         <div class="p_inner_block">                            
                                 <div class="payment_select"> 
+                                                <div class="payment_sel_lft">
+                                                <a onclick="return InterswitchPay();" id="InterswitchPay"  >
+                                                <input id="paypal_radio" type="radio" name="name" /></a><p><?php echo $this->Lang['GLOBAL_PAY']; ?></p></div>
                                         <?php if ($this->paypal_setting) { ?>
                                                 <div class="payment_sel_lft">
                                                 <a onclick="return SimilarProducts();" id="SimilarProducts"  >
-                                                <input id="paypal_radio" type="radio" name="name"  checked /></a><p><?php echo $this->Lang['PAYPAL']; ?></p></div>
+                                                <input id="paypal_radio" type="radio" name="name" /></a><p><?php echo $this->Lang['PAYPAL']; ?></p></div>
                                         <?php }else ?>
                                         <?php if ($this->credit_card_setting) { ?>
                                                 <div class="payment_sel_lft">  <a onclick="return SimilarDeals();" id="SimilarDeals"  >
@@ -509,6 +525,9 @@
                                 <?php if ($this->uri->last_segment() != "payment_details_friend.html") { ?>
                                 <div class="cash_pay">
                                 <?php echo new View("themes/" . THEME_NAME . "/paypal/cash_delivery"); ?>
+                                </div>
+                                <div class="interswitch_pay">
+                                <?php echo new View("themes/" . THEME_NAME . "/interswitch/pay"); ?>
                                 </div>
                                 <?php } ?>
                                 <div class="cancel_login">
