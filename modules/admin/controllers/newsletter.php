@@ -113,9 +113,11 @@ class Newsletter_Controller extends website_Controller {
 
 	public function send_daily_deals()
 	{
+		
 		if($_POST){
 
 			$city_list = $this->input->post("citydata");
+			
 
 			newsletter::send($city_list);
 			common::message(1, $this->Lang['DAILY_DEALS_SENT']);
@@ -123,8 +125,11 @@ class Newsletter_Controller extends website_Controller {
 			
 		}
 		//$this->cityDataList  = $this->news->getCityList();
+		
 		$this->categorylist = $this->news->get_top_category_list();
+		
 		$this->template->title = $this->Lang['SEND_NEWSL'];
+		
 		$this->template->content = new View("newsletter/send_daily_deal");
 	}
 

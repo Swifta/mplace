@@ -9,7 +9,9 @@ class newsletter{
 		ini_set('memory_limit', '256M');
 		if(!ini_get('safe_mode') ){
 		set_time_limit(7200);
-		}$userLists = array();  $cnt = 0;
+		}
+		$userLists = array();
+	    $cnt = 0;
 		include APPPATH."/vendor/swift/SmtpApiHeader.php";
 
 		$this->newsletter_user_list = $this->news->get_subscribed_user_list();
