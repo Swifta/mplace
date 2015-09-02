@@ -121,6 +121,7 @@ $config['modules'] = array
 	MODPATH.'kogeoip',            // GEO IP Location Modules
 	MODPATH.'api',                  // Mobile API Modules
     MODPATH.'webservices',        // ZenithBank API Modules
+    MODPATH.'webpay',        // GlobaPay Integration Modules
 	MODPATH.'admin',            // Admin Panel Modules
 	MODPATH.'merchant',      // Merchant Panel Modules
 	MODPATH.'home',            // Home Panel Modules

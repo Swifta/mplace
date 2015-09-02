@@ -611,6 +611,8 @@ $content_text = array(
 "PURCHACED_GR"=>"If you have purchased a $THIS_SITENAME before, you can sign in using your email address.",
 
 "COMP_ODR" => "Complete Order",
+    
+"PAY_NOW" => "Pay Now",
 
 "BY_CLICK"=>"By clicking Complete Order I accept the ",
 
@@ -1536,6 +1538,8 @@ $content_text = array(
 
 "ORD_COMPL_COD" => "Your Order is Successful. Please await shipping updates from merchant.",
 
+"GLOBAL_PAY" => "Interswitch WebPay",    
     
+"PROCEED_GLOBAL_PAY" => "Proceed to Payment via Interswitch Gateway", 
 
 			);
